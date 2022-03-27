@@ -2,6 +2,40 @@
     width: 0;
     height: 0;
 }
+.cates_container{
+    height: ~'calc(100vh - 96px)';
+    display: flex;
+    margin-top: 20px;
+    .left_menu{
+        flex: 2;
+        .menu_type{
+            Text{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: var(--themeColor);
+                font-size: 25px;
+            }
+            .menu_items{
+                font-size: 23px;
+                .menu_item{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 80rpx;
+                }
+                .active{
+                    color: var(--themeColor);
+                    border-left: 5rpx solid currentColor;
+                }
+            }
+        }
+       
+    }
+    .right_menu{
+        flex:5;
+    }
+}
 .lists{
     border-top: 1px solid #e4e2e2;
     padding: 0 35px;

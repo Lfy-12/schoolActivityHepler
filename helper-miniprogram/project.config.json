@@ -4,7 +4,7 @@
   "description": "Graduation Project",
   "appid": "wx6972672e0cb4a9bc",
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": false,
     "enhance": true,
     "postcss": false,
