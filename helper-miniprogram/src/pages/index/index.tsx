@@ -1,10 +1,34 @@
 import { View } from "@tarojs/components";
 import { Swiper, Image, Avatar } from "@taroify/core";
 import "./index.less";
+import { useEffect, useState } from "react";
+import Taro from "@tarojs/taro";
+import avatarPng from '../images/avatar.png'
+
 
 const indexPage = () => {
-  const today: Array<String> = new Date().toDateString().split(" "); //["Wed", "Mar", "16", "2022"]
-  console.log(today);
+
+  const [avatarUrl, setAvatarUrl] = useState<string>()
+  const today: Array<String> = new Date().toDateString().split(" ");   //["Wed", "Mar", "16", "2022"]
+
+  useEffect(()=>{
+    if(Taro.getStorageSync("userInfo")) setAvatarUrl(Taro.getStorageSync("userInfo").avatarUrl)
+  },[])
+
+  const getUserInfo = () => {
+    if(!avatarUrl) {
+      Taro.getUserProfile({
+        desc: '获取您的用户头像和个人信息',
+        success: (res) => {
+          Taro.setStorage({
+            key: "userInfo",
+            data: res.userInfo
+          })
+          setAvatarUrl(res.userInfo.avatarUrl)
+        }
+      })
+    }
+  }
 
   return (
     <View className="contianer">
@@ -14,12 +38,12 @@ const indexPage = () => {
       </View> */}
       <View className="top-info">
         <View className="left">
-          <View>
+          <View className="date">
             {today[1]} {today[2]} · {today[3]}
           </View>
-          <View>TODAY</View>
+          <View className="today">TODAY</View>
         </View>
-        <Avatar src="https://joeschmoe.io/api/v1/random" />
+        <Avatar src={avatarUrl || avatarPng} onClick={getUserInfo}/>
       </View>
 
       {/* 轮播 */}

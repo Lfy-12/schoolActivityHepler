@@ -1,17 +1,30 @@
 .contianer{
-  padding: 10px 30px;
+  padding: 30px;
   .top-info{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
+    .left{
+      .date{
+        font-size: 24px;
+        color: gray;
+      }
+      .today{
+        font-size: 48px;
+        font-weight: bold;
+        color: var(--themeColor);
+      }
+    }
   }
 
   .image-swiper {
+    border-radius: 25px;
     .image {
       display: block;
       box-sizing: border-box;
       width: 100%;
-      height: 200px * 2;
+      height: 220px * 2;
       background: #fff;
       pointer-events: none;
     }

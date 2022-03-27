@@ -1,15 +1,15 @@
 {
-  "miniprogramRoot": "dist/",
-  "projectname": "helper-miniprogram",
-  "description": "Graduation Project",
-  "appid": "wx6972672e0cb4a9bc",
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": []
+  },
   "setting": {
     "urlCheck": true,
-    "es6": false,
+    "es6": true,
     "enhance": true,
-    "postcss": false,
+    "postcss": true,
     "preloadBackgroundData": false,
-    "minified": false,
+    "minified": true,
     "newFeature": false,
     "coverView": true,
     "nodeModules": false,
@@ -42,5 +42,36 @@
     "ignoreUploadUnusedFiles": true
   },
   "compileType": "miniprogram",
-  "condition": {}
+  "libVersion": "2.23.0",
+  "appid": "wxcbe86b41a267d3e8",
+  "projectname": "schoolActivityHepler",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "scripts": {},
+  "staticServerOptions": {
+    "baseURL": "",
+    "servePath": ""
+  },
+  "isGameTourist": false,
+  "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "plugin": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": []
+    }
+  }
 }
