@@ -32,7 +32,7 @@ const categoryPage = () => {
         <Tabs.TabPane title="TYPE">
           <View className="cates_container">
             <ScrollView className="left_menu" scrollY>
-              <View className="menu_title">
+              <View className="menu_type">
                 <Text>/ 活动类别 /</Text>
                 <View className="menu_item" >
                   

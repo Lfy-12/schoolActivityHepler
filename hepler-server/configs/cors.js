@@ -1,7 +1,5 @@
 /**
  * @desc: 跨域处理配置项
- * @author: lianpf
- * @date: 2021-02-24
  *  */
 const corsConfigs = {
     exposeHeaders: ['WWW-Authenticate', 'Server-Authorization', 'Date'],

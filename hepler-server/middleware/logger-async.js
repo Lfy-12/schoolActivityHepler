@@ -2,8 +2,6 @@
  * @desc: 开发 logger 中间件
  * @koa-version: v2+
  * @path: ./middleware/logger-async.js
- * @author: lianpf
- * @date: 2021-02-12
  * */
 
  function log( ctx ) {
