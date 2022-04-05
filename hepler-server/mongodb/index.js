@@ -82,9 +82,8 @@ class Db {
         // 操作db库里的某一个表，更新一条数据，json1查找的内容，json2更新的新内容，回调函数
         db.collection(collectionName).updateOne(
           json1,
-          {
-            $set: json2,
-          },
+          json2,
+          {upsert:true},
           (err, result) => {
             if (err) {
               reject(err);
