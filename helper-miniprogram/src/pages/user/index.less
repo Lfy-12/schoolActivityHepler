@@ -1,5 +1,5 @@
 .contianer {
-    height: 100vh;
+  height: 100vh;
   background-color: #edece8;
 
   .user_info_wrap {
@@ -7,27 +7,34 @@
     overflow: hidden;
     background-color: var(--themeColor);
     position: relative;
+
     .hide {
       display: none;
     }
+
     .user_img_wrap {
       position: relative;
+
       .user_bg {
         height: 50vh;
+        width: 100vw;
         // 高斯模糊
         filter: blur(15rpx);
       }
+
       .user_info {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
         top: 20%;
         text-align: center;
+
         .user_icon {
           width: 150rpx;
           height: 150rpx;
           border-radius: 50%;
         }
+
         .user_name {
           color: #fff;
           margin-top: 40rpx;
@@ -35,6 +42,7 @@
         }
       }
     }
+
     .user_btn {
       position: absolute;
       left: 50%;
@@ -50,6 +58,7 @@
 
   .user_content {
     position: relative;
+
     .user_main {
       padding-bottom: 100rpx;
       color: #666;
@@ -59,45 +68,49 @@
       transform: translateX(-50%);
       top: -40rpx;
 
-      .address_wrap{
+      .address_wrap {
         margin-top: 30rpx;
         background-color: #fff;
-        padding: 20rpx ;
+        padding: 20rpx;
       }
 
       .history_wrap {
         background-color: #fff;
         display: flex;
         padding: 10rpx 0;
+
         navigator {
           flex: 1;
           text-align: center;
           padding: 10rpx 0;
+
           .his_num {
             color: var(--themeColor);
           }
-          .his_name {
-          }
+
+          .his_name {}
         }
       }
 
       .app_info_wrap {
         margin-top: 30rpx;
         background-color: #fff;
+
         .app_info_item {
           padding: 20rpx;
           border-bottom: 1rpx solid #ccc;
         }
+
         .app_info_contact {
           display: flex;
           justify-content: space-between;
         }
       }
 
-      .recommend_wrap{
+      .recommend_wrap {
         margin-top: 30rpx;
         background-color: #fff;
-        padding: 20rpx ;
+        padding: 20rpx;
       }
     }
   }

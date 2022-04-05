@@ -1,90 +1,142 @@
-import { Tabs, Calendar, TreeSelect, DropdownMenu } from "@taroify/core"
-import { View, Text, ScrollView } from "@tarojs/components";
+import { Tabs, Calendar, DropdownMenu, Search, Empty } from "@taroify/core"
+import { View, Text, Navigator } from "@tarojs/components";
 import { useEffect, useState } from "react";
 import './index.less'
 import { BullhornOutlined } from "@taroify/icons"
 import { request } from '../utils/http'
-import Taro from "@tarojs/taro";
+import { activityListType } from "../utils/type";
 
-type activityListType = {
-  _id: number,
-  title: string,
-  type: string,
-  content: string,
-  startDate: string,
-  endDate: string,
-  num: number,
-  community: string,
-  where: string,
-  // comment:[],
-}
-
-type categoryType = {
+type type = {
   _id: number,
   value: string,
-  children?: Array<categoryType>
 }
 
 type request = {
   code: number,
-  data: Array<activityListType | categoryType>
+  data: Array<activityListType | type>
 }
 
 const categoryPage = () => {
-  const [value, setValue] = useState<number>(0)
-  const [category, setCategory] = useState<Array<categoryType>>([])
-  const [activityList, setActivityList] = useState<Array<activityListType>>([])
-  const [partActivityList, setPartActivityList] = useState<Array<activityListType>>([])
+  const [activityType, setActivityType] = useState<Array<type>>([]);
+  const [sutuoType, setSutuoType] = useState<Array<type>>([]);
+  const [peopleType, setPeopleType] = useState<Array<type>>([]);
 
+  const [activityTypeValue, setActivityTypeValue] = useState('');
+  const [sutuoTypeValue, setSutuoTypeValue] = useState('');
+  const [peopleTypeValue, setPeopleTypeValue] = useState('');
+  const [schoolArea, setSchoolArea] = useState('');
+
+  const [tab, setTab] = useState<number>(0)
+  const [inputValue, setInputValue] = useState("")
+  const [activityList1, setActivityList1] = useState<Array<activityListType>>([])
+  const [activityList2, setActivityList2] = useState<Array<activityListType>>([])
+  const [partActivityList, setPartActivityList] = useState<Array<activityListType>>([])
 
   useEffect(() => {
     initData()
   }, [])
 
   const initData = () => {
-    request({ url: "/category", method: "GET" }).then(res => {
-      setCategory(res.data)
+    request({ url: "/activityType", method: "GET" }).then(res => {
+      setActivityType(res.data)
+    })
+    request({ url: "/sutuotype", method: "GET" }).then(res => {
+      setSutuoType(res.data)
+    })
+    request({ url: "/peopleType", method: "GET" }).then(res => {
+      setPeopleType(res.data)
     })
     request({ url: "/activity", method: "GET" }).then(res => {
-      setActivityList(res.data)
+      setActivityList1(res.data)
+    })
+    // request({ url: "/activity", method: "GET" }).then(res => {
+    //   setActivityList2(res.data)
+    // })
+  }
+
+  const searchActivity = () => {
+    const data: any = {};
+    if (inputValue) data.title = inputValue
+    if (activityTypeValue) data.activityType = activityTypeValue
+    if (sutuoTypeValue) data.sutuoType = sutuoTypeValue
+    if (peopleTypeValue) data.peopleType = peopleTypeValue
+    if (schoolArea) data.where = schoolArea
+    request({ url: "/activity", method: "GET", data }).then(res => {
+      setActivityList1(res.data)
     })
   }
 
   const changeActivityList = (date) => {
     console.log(date);
-    // setActivityList
+    // setActivityList1
   }
 
   return (
-    <Tabs value={value} onChange={setValue}>
+    <Tabs value={tab} onChange={setTab}>
 
-      {/* 分类栏 */}
+      {/* 分类标签栏 */}
       <Tabs.TabPane title="TYPE">
-        <View className="cates_container">
-          <ScrollView className="left_menu" scrollY>
-            {
-              category.map(item => {
-                return (
-                  <View className="menu_type" key={item._id}>
-                    <Text>/ {item.value} /</Text>
-                    <View className="menu_items">
-                      {
-                        item.children?.map(type => {
-                          return (
-                            <View className="menu_item" key={type._id}>{type.value}</View>
-                          )
-                        })
-                      }
-                    </View>
-                  </View>
-                )
-              })
-            }
-          </ScrollView>
-          <ScrollView className="right_menu" scrollY>
 
-          </ScrollView>
+        <Search
+          value={inputValue}
+          placeholder="请输入搜索关键词"
+          onChange={(e) => setInputValue(e.detail.value)}
+          action={<View onClick={searchActivity}>搜索</View>}
+        />
+
+        <DropdownMenu>
+          <DropdownMenu.Item value={activityTypeValue} onChange={setActivityTypeValue}>
+            <DropdownMenu.Option value={''}>请选择活动类型</DropdownMenu.Option>
+            {
+              activityType.map(item => <DropdownMenu.Option value={item.value}>{item.value}</DropdownMenu.Option>)
+            }
+          </DropdownMenu.Item>
+          <DropdownMenu.Item value={sutuoTypeValue} onChange={setSutuoTypeValue}>
+            <DropdownMenu.Option value={''}>请选择素拓类型</DropdownMenu.Option>
+            {
+              sutuoType.map(item => <DropdownMenu.Option value={item.value}>{item.value}</DropdownMenu.Option>)
+            }
+          </DropdownMenu.Item>
+          <DropdownMenu.Item value={schoolArea} onChange={setSchoolArea}>
+            <DropdownMenu.Option value={''}>请选择校区</DropdownMenu.Option>
+            <DropdownMenu.Option value={'广州校区'}>广州校区</DropdownMenu.Option>
+            <DropdownMenu.Option value={'佛山校区'}>佛山校区</DropdownMenu.Option>
+          </DropdownMenu.Item>
+          <DropdownMenu.Item value={peopleTypeValue} onChange={setPeopleTypeValue}>
+            <DropdownMenu.Option value={''}>请选择活动对象</DropdownMenu.Option>
+            {
+              peopleType.map(item => <DropdownMenu.Option value={item.value}>{item.value}</DropdownMenu.Option>)
+            }
+          </DropdownMenu.Item>
+        </DropdownMenu>
+
+        <Empty className={activityList1.length != 0 ? "hide":""}>
+          <Empty.Image
+            className="custom-empty__image"
+            src="https://img.yzcdn.cn/vant/custom-empty-image.png"
+          />
+          <Empty.Description>暂无活动</Empty.Description>
+        </Empty>
+
+        <View className="activity-lists">
+          {
+            activityList1.map(item => {
+              return (
+                <Navigator url={"/pages/activity_item/index?_id=" + item._id} className="activity-list">
+                  <View className="activity-title">
+                    {item.title}
+                  </View>
+                  <View className="activity-content">{item.content}</View>
+                  <View className="activity-bottom">
+                    <Text className="people">{item.where[0] + item.peopleType}</Text>
+                    <Text className="time">{item.time[0] + '-' + item.time[1]}</Text>
+                  </View>
+                </Navigator>
+              )
+            })
+          }
         </View>
+
       </Tabs.TabPane>
 
       {/* 活动日历栏 */}
@@ -102,6 +154,7 @@ const categoryPage = () => {
           </View>
         </View>
       </Tabs.TabPane>
+
     </Tabs>
   )
 }

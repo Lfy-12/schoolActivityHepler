@@ -7,6 +7,7 @@ import {
   FriendsOutlined,
   BarChartOutlined,
 } from "@taroify/icons";
+import { request } from "../utils/http";
 
 const indexPage = () => {
   const [userInfo, setUserInfo] = useState<any>({});
@@ -17,15 +18,43 @@ const indexPage = () => {
   }, []);
 
   const getUserInfo = () => {
-    if (!userInfo.avatarUrl) {
+    if (!userInfo.openid) {
+      let openid;
+      Taro.login({
+        success: (res) => {
+          request({
+            url: '/onLogin',
+            method: 'GET',
+            data: { code: res.code }
+          }).then(res => {
+            openid = res.data.openid
+          })
+        }
+      })
       Taro.getUserProfile({
         desc: "获取您的用户头像和个人信息",
         success: (res) => {
+          let userInfo = {
+            openid,
+            avatarUrl:res.userInfo.avatarUrl,
+            nickName: res.userInfo.nickName
+          }
           Taro.setStorage({
             key: "userInfo",
-            data: res.userInfo,
+            data: userInfo
           });
-          setUserInfo(res.userInfo);
+          setUserInfo(userInfo);
+          // 存储user数据到数据库
+          request({
+            url: '/user/update',
+            method: 'POST',
+            data: [
+              {_id: openid},
+              {nickName: res.userInfo.nickName}
+            ]
+          }).then(res => {
+            console.log(res);
+          })
         },
       });
     }
@@ -53,15 +82,15 @@ const indexPage = () => {
       <View className="user_content">
         <View className="user_main">
           <View className="history_wrap">
-            <Navigator url="/pages/my_activity/index?type=1">
+            <Navigator url="/pages/my_activity/index?type=0">
               <LikeOutlined size="18" style={{ color: "red" }} />
               <View className="his_name">收藏列表</View>
             </Navigator >
-            <Navigator url="/pages/my_activity/index?type=2">
+            <Navigator url="/pages/my_activity/index?type=1">
               <FriendsOutlined size="18" style={{ color: "red" }} />
               <View className="his_name">报名列表</View>
             </Navigator>
-            <Navigator url="/pages/my_activity/index?type=3">
+            <Navigator url="/pages/my_activity/index?type=2">
               <BarChartOutlined size="18" style={{ color: "red" }} />
               <View className="his_name">发布管理</View>
             </Navigator>

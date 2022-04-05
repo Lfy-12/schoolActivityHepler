@@ -1,12 +1,12 @@
 import { View, Text } from '@tarojs/components'
 import './index.less'
 
-const searchPage = () => {
+const userPage = () => {
   return (
     <View>
-      <Text>搜索</Text>
+      <Text>活动详情页</Text>
     </View>
   )
 }
 
-export default searchPage;
+export default userPage;

@@ -1,59 +1,88 @@
-.taroify-calendar__header-title{
+.taroify-calendar__header-title {
     width: 0;
     height: 0;
 }
-.cates_container{
-    height: ~'calc(100vh - 96px)';
+
+.taroify-dropdown-menu__bar {
+    border: none;
+    box-shadow: none;
+    width: 100vw;
+    height: 140px;
     display: flex;
-    margin-top: 20px;
-    .left_menu{
-        flex: 2;
-        .menu_type{
-            Text{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                color: var(--themeColor);
-                font-size: 25px;
-            }
-            .menu_items{
-                font-size: 23px;
-                .menu_item{
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 80rpx;
-                }
-                .active{
-                    color: var(--themeColor);
-                    border-left: 5rpx solid currentColor;
-                }
-            }
-        }
-       
-    }
-    .right_menu{
-        flex:5;
+    flex-wrap: wrap;
+
+    .taroify-dropdown-menu-title {
+        width: 50%;
+        height: 80px;
+        flex: 0 1 auto;
     }
 }
-.lists{
+
+.hide{
+    display: none;
+}
+
+.activity-lists {
+    margin-top: 30px;
+    .activity-list {
+        background-color: #fff;
+        margin: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        // box-shadow: var(--themeColor) 5px 5px 8px;
+        box-shadow: #ccc 5px 5px 8px;
+
+        .activity-title {
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .activity-content {
+            margin: 8px 0;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /*! autoprefixer: off */
+            -webkit-line-clamp:3;
+            /*! autoprefixer: off */
+            -webkit-box-orient: vertical
+        }
+
+        .activity-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 20px;
+            color: #ccc;
+
+            .people {}
+        }
+    }
+}
+
+.lists {
     border-top: 1px solid #e4e2e2;
     padding: 0 35px;
     font-size: 30px;
-    .list{
+
+    .list {
         display: flex;
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid #f4f5f7;
         height: 70px;
-        .title{
+
+        .title {
             margin-left: 15px;
         }
-        .community{
+
+        .community {
             color: #ccc;
         }
     }
-    .list:last-child{
+
+    .list:last-child {
         border: none;
     }
 }

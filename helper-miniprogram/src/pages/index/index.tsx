@@ -4,6 +4,7 @@ import "./index.less";
 import { useEffect, useState } from "react";
 import Taro from "@tarojs/taro";
 import avatarPng from '../images/avatar.png'
+import { request } from "../utils/http";
 
 
 const indexPage = () => {
@@ -16,17 +17,43 @@ const indexPage = () => {
   },[])
 
   const getUserInfo = () => {
-    if(!avatarUrl) {
-      Taro.getUserProfile({
-        desc: '获取您的用户头像和个人信息',
+    if (!avatarUrl) {
+      let openid;
+      Taro.login({
         success: (res) => {
-          Taro.setStorage({
-            key: "userInfo",
-            data: res.userInfo
+          request({
+            url: '/onLogin',
+            method: 'GET',
+            data: { code: res.code }
+          }).then(res => {
+            openid = res.data.openid
           })
-          setAvatarUrl(res.userInfo.avatarUrl)
         }
       })
+      Taro.getUserProfile({
+        desc: "获取您的用户头像和个人信息",
+        success: (res) => {
+          console.log(res);
+          let userInfo = {
+            openid,
+            avatarUrl: res.userInfo.avatarUrl,
+            nickName: res.userInfo.nickName
+          }
+          Taro.setStorage({
+            key: "userInfo",
+            data: userInfo
+          });
+          setAvatarUrl(res.userInfo.avatarUrl);
+          // 存储user数据到数据库
+          request({
+            url: '/user',
+            method: 'POST',
+            data: userInfo
+          }).then(res => {
+            console.log(res);
+          })
+        },
+      });
     }
   }
 

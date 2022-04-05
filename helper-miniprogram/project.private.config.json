@@ -29,6 +29,27 @@
           "pathName": "pages/index/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "我的",
+          "pathName": "pages/user/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "发布活动",
+          "pathName": "pages/add_activity/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "我的活动",
+          "pathName": "pages/my_activity/index",
+          "query": "type=2",
+          "scene": null,
+          "launchMode": "default"
         }
       ]
     }
