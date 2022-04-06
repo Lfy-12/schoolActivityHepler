@@ -1,13 +1,12 @@
 import { Button, Calendar, Cell, DatetimePicker, Form, Picker, Popup, Textarea, Toast } from '@taroify/core';
 import { FormItemInstance } from '@taroify/core/form';
 import { View, Input, BaseEventOrig, FormProps } from '@tarojs/components'
-import { ArrowRight } from "@taroify/icons"
-import _ from 'lodash';
+import { ArrowRight,Idcard,Records,ClusterOutlined,Logistics,CalendarOutlined,UnderwayOutlined,FriendsOutlined,PointGiftOutlined,GuideOutlined,ManagerOutlined} from "@taroify/icons"
 import { useEffect, useRef, useState } from 'react';
 import './index.less'
 import { request } from '../utils/http';
 import Taro from '@tarojs/taro';
-import { activityListType } from '../utils/type';
+import { formatDate, formatTime } from '../utils/tool';
 
 const userPage = () => {
 
@@ -48,22 +47,7 @@ const userPage = () => {
     value: string,
   }
 
-  const formatTime = (date: any) => {
-    if (date) {
-      const hours = _.padStart(_.toString(date?.getHours()), 2, "0")
-      const minutes = _.padStart(_.toString(date?.getMinutes()), 2, "0")
-      return `${hours}:${minutes}`
-    }
-  }
 
-  const formatDate = (date: any) => {
-    if (date) {
-      const years = _.padStart(_.toString(date?.getFullYear()), 4, "0")
-      const months = _.padStart(_.toString(date?.getMonth() + 1), 2, "0")
-      const days = _.padStart(_.toString(date?.getDate()), 2, "0")
-      return `${years}.${months}.${days}`
-    }
-  }
 
   const onSubmit = (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => {
     let data = {
@@ -125,14 +109,15 @@ const userPage = () => {
         <Cell.Group inset>
 
           <Form.Item name="title" rules={[{ required: true, message: "请输入活动标题" }]}>
-            <Form.Label>活动标题</Form.Label>
+          
+            <Form.Label><Idcard />活动标题</Form.Label>
             <Form.Control>
               <Input placeholder="请输入活动标题" />
             </Form.Control>
           </Form.Item>
 
           <Form.Item name="content" rules={[{ required: true, message: "请描述活动内容" }]}>
-            <Form.Label>活动内容</Form.Label>
+            <Form.Label><Records />活动内容</Form.Label>
             <Form.Control>
               <Textarea autoHeight placeholder="请描述活动内容" />
             </Form.Control>
@@ -140,7 +125,7 @@ const userPage = () => {
 
           {/* 选择校区 */}
           <Form.Item ref={whereRef} name="where1" clickable rightIcon={<ArrowRight />} >
-            <Form.Label>校区</Form.Label>
+            <Form.Label><ClusterOutlined />校区</Form.Label>
             <Form.Control>
               <Input placeholder="点击选择校区" onClick={() => setWhereOpen(true)} />
             </Form.Control>
@@ -166,7 +151,7 @@ const userPage = () => {
           </Popup>
 
           <Form.Item name="where2" rules={[{ required: true, message: "请输入活动举办地点" }]}>
-            <Form.Label>活动地点</Form.Label>
+            <Form.Label><Logistics />地点</Form.Label>
             <Form.Control>
               <Input placeholder="请输入活动地点" />
             </Form.Control>
@@ -174,7 +159,7 @@ const userPage = () => {
 
           {/* 日历选择器 */}
           <Form.Item ref={dateRef} name="date" clickable rightIcon={<ArrowRight />} >
-            <Form.Label>活动日期</Form.Label>
+            <Form.Label><CalendarOutlined />举办日期</Form.Label>
             <Form.Control>
               {(controller) => (
                 <Input
@@ -209,7 +194,7 @@ const userPage = () => {
 
           {/* 时间选择器 */}
           <Form.Item ref={timeRef} name="time" clickable rightIcon={<ArrowRight />} >
-            <Form.Label>活动时间</Form.Label>
+            <Form.Label><UnderwayOutlined />开始时间</Form.Label>
             <Form.Control>
               {(controller) => (
                 <Input
@@ -238,7 +223,7 @@ const userPage = () => {
 
           {/* 选择发布单位 */}
           <Form.Item ref={communityRef} name="community" clickable rightIcon={<ArrowRight />} >
-            <Form.Label>发布单位</Form.Label>
+            <Form.Label><ManagerOutlined />发布单位</Form.Label>
             <Form.Control>
               <Input placeholder="点击选择发布单位" onClick={() => setCommunityOpen(true)} />
             </Form.Control>
@@ -265,7 +250,7 @@ const userPage = () => {
 
           {/* 选择素拓类型 */}
           <Form.Item ref={sutuoRef} name="sutuoType" clickable rightIcon={<ArrowRight />}>
-            <Form.Label>素拓类型</Form.Label>
+            <Form.Label><PointGiftOutlined />素拓类型</Form.Label>
             <Form.Control>
               <Input placeholder="点击选择素拓类型" onClick={() => setSutuoOpen(true)} />
             </Form.Control>
@@ -292,7 +277,7 @@ const userPage = () => {
 
           {/* 选择活动类型 */}
           <Form.Item ref={activityRef} name="activityType" clickable rightIcon={<ArrowRight />} >
-            <Form.Label>活动类型</Form.Label>
+            <Form.Label><GuideOutlined />类型</Form.Label>
             <Form.Control>
               <Input placeholder="点击选择活动类型" onClick={() => setActivityOpen(true)} />
             </Form.Control>
@@ -319,7 +304,7 @@ const userPage = () => {
 
           {/* 选择面向对象 */}
           <Form.Item ref={peopleRef} name="peopleType" clickable rightIcon={<ArrowRight />}>
-            <Form.Label>面向对象</Form.Label>
+            <Form.Label><FriendsOutlined />面向对象</Form.Label>
             <Form.Control>
               <Input placeholder="点击选择面向对象" onClick={() => setpeopleOpen(true)} />
             </Form.Control>

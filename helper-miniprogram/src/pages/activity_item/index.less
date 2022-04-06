@@ -1,0 +1,44 @@
+.hide {
+    display: none;
+}
+
+.container {
+    height: 100vh;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 130px;
+    background: white;
+    box-shadow: #ccc -5px -5px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .item {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .btn-box {
+        flex: 5;
+        .btn1 {
+            width: 100%;
+            background: linear-gradient(to right, #ff6034, #ee0a24);
+            color: #fff;
+        }
+        .btn2 {
+            width: 100%;
+            background: linear-gradient(to right, #ffd01e, #ff8917);
+            color: #fff;
+        }
+    }
+
+
+}

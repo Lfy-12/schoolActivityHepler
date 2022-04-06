@@ -1,10 +1,11 @@
-import { Tabs, Calendar, DropdownMenu, Search, Empty } from "@taroify/core"
+import { Tabs, Calendar, DropdownMenu, Search, Empty, Divider, Button } from "@taroify/core"
 import { View, Text, Navigator } from "@tarojs/components";
 import { useEffect, useState } from "react";
 import './index.less'
-import { BullhornOutlined } from "@taroify/icons"
+import { VolumeOutlined } from "@taroify/icons"
 import { request } from '../utils/http'
 import { activityListType } from "../utils/type";
+import { useReachBottom } from "@tarojs/taro";
 
 type type = {
   _id: number,
@@ -36,6 +37,12 @@ const categoryPage = () => {
     initData()
   }, [])
 
+
+  const formatDate = (d) => {
+    return d.getFullYear() + '.' + (d.getMonth() + 1) + '.' + d.getDate() + ''
+
+  }
+
   const initData = () => {
     request({ url: "/activityType", method: "GET" }).then(res => {
       setActivityType(res.data)
@@ -49,9 +56,10 @@ const categoryPage = () => {
     request({ url: "/activity", method: "GET" }).then(res => {
       setActivityList1(res.data)
     })
-    // request({ url: "/activity", method: "GET" }).then(res => {
-    //   setActivityList2(res.data)
-    // })
+
+    request({ url: "/activity", method: "GET", data: { time: formatDate(new Date()) } }).then(res => {
+      setActivityList2(res.data)
+    })
   }
 
   const searchActivity = () => {
@@ -67,8 +75,9 @@ const categoryPage = () => {
   }
 
   const changeActivityList = (date) => {
-    console.log(date);
-    // setActivityList1
+    request({ url: "/activity", method: "GET", data: { time: formatDate(date) } }).then(res => {
+      setActivityList2(res.data)
+    })
   }
 
   return (
@@ -81,7 +90,7 @@ const categoryPage = () => {
           value={inputValue}
           placeholder="请输入搜索关键词"
           onChange={(e) => setInputValue(e.detail.value)}
-          action={<View onClick={searchActivity}>搜索</View>}
+          action={<Button onClick={searchActivity} variant="outlined" color="danger" hairline style={{width:"60px",height:"35px"}}>搜索</Button>}
         />
 
         <DropdownMenu>
@@ -110,7 +119,29 @@ const categoryPage = () => {
           </DropdownMenu.Item>
         </DropdownMenu>
 
-        <Empty className={activityList1.length != 0 ? "hide":""}>
+        <Divider style={{ color: "#ee0a24", borderColor: "#ee0a24", padding: "0 8px" ,marginBottom:"8px"}}>
+          以下为搜索结果
+        </Divider>
+        <View className="lists">
+          {
+            activityList1.map(item => {
+              return (
+                <Navigator url={"/pages/activity_item/index?_id=" + item._id} className="list">
+                  <View className="left">
+                    <VolumeOutlined style={{ color: "#ee0a24" }} />
+                    <Text className="title">{item.title}</Text>
+                  </View>
+                  <View className="right">
+                    <Text className="community">{item.time[0]} </Text>&gt;
+                  </View>
+                </Navigator>
+              )
+            }
+            )
+          }
+        </View>
+
+        <Empty className={activityList1.length != 0 ? "hide" : ""}>
           <Empty.Image
             className="custom-empty__image"
             src="https://img.yzcdn.cn/vant/custom-empty-image.png"
@@ -118,41 +149,42 @@ const categoryPage = () => {
           <Empty.Description>暂无活动</Empty.Description>
         </Empty>
 
-        <View className="activity-lists">
-          {
-            activityList1.map(item => {
-              return (
-                <Navigator url={"/pages/activity_item/index?_id=" + item._id} className="activity-list">
-                  <View className="activity-title">
-                    {item.title}
-                  </View>
-                  <View className="activity-content">{item.content}</View>
-                  <View className="activity-bottom">
-                    <Text className="people">{item.where[0] + item.peopleType}</Text>
-                    <Text className="time">{item.time[0] + '-' + item.time[1]}</Text>
-                  </View>
-                </Navigator>
-              )
-            })
-          }
-        </View>
-
       </Tabs.TabPane>
 
       {/* 活动日历栏 */}
-      <Tabs.TabPane title="CALENDAR">
+      <Tabs.TabPane title="CALENDAR" className="calendar">
         {/* 日历 */}
-        <Calendar style={{ height: "400px" }} onChange={changeActivityList} title="" defaultValue={new Date()} max={new Date(new Date().setDate(new Date().getDate() + 14))} />
+        <Calendar style={{ height: "400px" }} onChange={changeActivityList} title="" defaultValue={new Date()} max={new Date(new Date().setDate(new Date().getDate() + 30))} />
         {/* 活动列表 */}
         <View className="lists">
-          <View className="list">
-            <View className="left">
-              <BullhornOutlined />
-              <Text className="title">Title</Text>
-            </View>
-            <Text className="community">Community &gt;</Text>
-          </View>
+          {
+            activityList2.map(item => {
+              return (
+                <Navigator url={"/pages/activity_item/index?_id=" + item._id} className="list">
+                  <View className="left">
+                    <VolumeOutlined style={{ color: "#ee0a24" }} />
+                    <Text className="title">{item.title}</Text>
+                  </View>
+                  <View className="right">
+                    <Text className="community">{item.community} </Text>&gt;
+                  </View>
+
+                </Navigator>
+              )
+            }
+            )
+          }
         </View>
+
+        <Empty className={activityList2.length != 0 ? "hide" : ""}>
+          <Empty.Image
+            className="custom-empty__image"
+            src="https://img.yzcdn.cn/vant/custom-empty-image.png"
+            style={{ width: "50px", height: "50px" }}
+          />
+          <Empty.Description>当天暂无活动</Empty.Description>
+        </Empty>
+
       </Tabs.TabPane>
 
     </Tabs>

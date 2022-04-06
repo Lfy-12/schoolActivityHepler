@@ -1,16 +1,19 @@
-.contianer{
+.contianer {
   padding: 30px;
-  .top-info{
+
+  .top-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    .left{
-      .date{
+
+    .left {
+      .date {
         font-size: 24px;
         color: gray;
       }
-      .today{
+
+      .today {
         font-size: 48px;
         font-weight: bold;
         color: var(--themeColor);
@@ -20,6 +23,7 @@
 
   .image-swiper {
     border-radius: 25px;
+
     .image {
       display: block;
       box-sizing: border-box;
@@ -29,6 +33,96 @@
       pointer-events: none;
     }
   }
-  
-}
 
+  .floor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px;
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .image {
+        width: 130px;
+        height: 130px;
+
+      }
+
+      .text {
+        color: #656565;
+      }
+    }
+  }
+
+  .like-box {
+    padding-top: 15px;
+
+    // width: 100vw;
+    // border-top: 15px solid #f1f1f1;
+    .like-title {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+
+      .image {
+        width: 50px;
+        height: 50px;
+      }
+
+      .text {
+        padding: 10px;
+      }
+    }
+
+    .items {
+      .item {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        // border: 1px solid var(--themeColor);
+        box-shadow: gray 5px 5px 8px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .left {
+         flex: 2;
+         width: 100px;
+         height: 100px;
+         padding-right: 20px;
+        }
+
+        .right {
+          flex: 5;
+          .title {
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+          }
+
+          .content {
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /*! autoprefixer: off */
+            -webkit-line-clamp: 2;
+            /*! autoprefixer: off */
+            -webkit-box-orient: vertical
+          }
+
+          .bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ccc;
+          }
+        }
+      }
+    }
+  }
+
+}

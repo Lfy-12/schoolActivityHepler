@@ -58,7 +58,7 @@ router.get('/activity', async (ctx, next) => {
     if (ctx.query.title) result = await DB.find('activity', { ...ctx.query, title: { $regex: ctx.query.title } });  // 兼容 标题模糊搜素
     else if (ctx.query._id) result = await DB.find('activity', { _id: DB.getObjectID(ctx.query._id) });  // 按 活动id 搜索
     else result = await DB.find('activity', ctx.query);
-    console.log(result);
+    // console.log(result);
     ctx.response.body = JSON.stringify({
       code: 200,
       data: result

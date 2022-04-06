@@ -1232,6 +1232,18 @@
   resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.9.0.tgz#cbac84b996475b8fc983931539ed1261174e2df3"
   integrity sha512-kY3xYolZoJO1MKslL0NQccHy72R3TIl1prHgfmIrEoGcnMgc6uiskdWaGMuI5/sCGz9T+QuTVz76B1H2ySyBZg==
 
+"@taroify/commerce@^0.0.29-alpha.4":
+  version "0.0.29-alpha.4"
+  resolved "https://registry.yarnpkg.com/@taroify/commerce/-/commerce-0.0.29-alpha.4.tgz#a92380cf4fc9de3ce48cd204ff6fc9a4a2a3fed2"
+  integrity sha512-iB0u1iLxj3p0ymcONd8a+YRfORdomu/5ye2T9FVmGV2n1OLd0saRBf6IDV0xG6pGiuWVRPnolMPvci3QCzOUmg==
+  dependencies:
+    "@taroify/core" "^0.0.29-alpha.4"
+    classnames "^2.2.6"
+    lodash "^4.17.21"
+    raf "^3.4.1"
+    react-is "^17.0.2"
+    react-transition-group "^4.4.1"
+
 "@taroify/core@^0.0.28-alpha.1":
   version "0.0.28-alpha.1"
   resolved "https://registry.yarnpkg.com/@taroify/core/-/core-0.0.28-alpha.1.tgz#c560a9cc0e5324c6170988ae78f1daa1c7c92bf5"
@@ -1239,6 +1251,20 @@
   dependencies:
     "@taroify/hooks" "^0.0.28-alpha.1"
     "@taroify/icons" "^0.0.28-alpha.1"
+    classnames "^2.2.6"
+    lodash "^4.17.21"
+    promise "^8.1.0"
+    raf "^3.4.1"
+    react-is "^17.0.2"
+    react-transition-group "^4.4.1"
+
+"@taroify/core@^0.0.29-alpha.4":
+  version "0.0.29-alpha.4"
+  resolved "https://registry.yarnpkg.com/@taroify/core/-/core-0.0.29-alpha.4.tgz#979251e2664da3befbb13545cfb15621ce4fa73a"
+  integrity sha512-oRUt/2KVG2sIqPV01Uu3OkmpuniYeUgvNBQtzyJYNlQyXGKy8EkdE/OKkNrYTGIVj7nbQ72x6VTgkUTHh+eUGQ==
+  dependencies:
+    "@taroify/hooks" "^0.0.29-alpha.4"
+    "@taroify/icons" "^0.0.29-alpha.4"
     classnames "^2.2.6"
     lodash "^4.17.21"
     promise "^8.1.0"
@@ -1255,10 +1281,24 @@
     lodash "^4.17.21"
     react "^17.0.2"
 
+"@taroify/hooks@^0.0.29-alpha.4":
+  version "0.0.29-alpha.4"
+  resolved "https://registry.yarnpkg.com/@taroify/hooks/-/hooks-0.0.29-alpha.4.tgz#56921792d7266b484fa91007927f960ffad70a0f"
+  integrity sha512-fk03zkOtgthdGSmFepLjjkeYVf6TubBnl7zPg2JjU774l+8XGaDcnoLK6+8dyN6RU9k2e3zPQJWExBdArfz/MQ==
+  dependencies:
+    "@vant/area-data" "^1.2.1"
+
 "@taroify/icons@^0.0.28-alpha.1":
   version "0.0.28-alpha.1"
   resolved "https://registry.yarnpkg.com/@taroify/icons/-/icons-0.0.28-alpha.1.tgz#e767fbb125cd9488ac4b046e0858e0143b7174b4"
   integrity sha512-v+pZBhi6VwNInMSVoZgz0DkcU55d1hE+koO/Elg7oNnxP6RB43KfhWWiEh71wqeGkM81KEO3ZylW1VFYFGqCSA==
+  dependencies:
+    classnames "^2.2.6"
+
+"@taroify/icons@^0.0.29-alpha.4":
+  version "0.0.29-alpha.4"
+  resolved "https://registry.yarnpkg.com/@taroify/icons/-/icons-0.0.29-alpha.4.tgz#9ef1b2ca79c4c7a89f12818f5a50da7383d3ddae"
+  integrity sha512-Au16aujhsQDwBtUEun83OtqKfkoUbYKzKFf25FzcQWwv0xjpddl9+8abbLw8AlV0UIx2Mngzx9qoxLr95NDygA==
   dependencies:
     classnames "^2.2.6"
 

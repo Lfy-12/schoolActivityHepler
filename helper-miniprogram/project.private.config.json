@@ -48,6 +48,13 @@
           "name": "我的活动",
           "pathName": "pages/my_activity/index",
           "query": "type=2",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "活动详情页",
+          "pathName": "pages/activity_item/index",
+          "query": "_id=6240710628610ace88195797",
           "scene": null,
           "launchMode": "default"
         }

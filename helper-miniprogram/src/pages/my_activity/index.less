@@ -1,15 +1,47 @@
+.container {
+    background: #f7f8fa;
+}
+
 .hide {
     display: none;
 }
 
+.custom-swipe-cell {
+
+    .taroify-swipe-cell__actions {
+        .taroify-button {
+            height: 100%;
+        }
+    }
+
+    .custom-card {
+        background: #fff;
+        position: relative;
+        box-sizing: border-box;
+        padding: 8px * 2 16px * 2;
+        color: #323233;
+        font-size: 12px;
+        display: flex;
+
+        &__thumb {
+            position: relative;
+            flex: none;
+            width: 88px * 2;
+            height: 88px * 2;
+            margin-right: 8px * 2;
+        }
+    }
+}
+
 .activity-lists {
     margin-top: 30px;
+    height: 90vh;
 
     .activity-list {
         background-color: #fff;
-        margin: 20px;
+        margin: 20px 0;
         padding: 20px;
-        border-radius: 10px;
+        border-radius: 20px;
         // box-shadow: var(--themeColor) 5px 5px 8px;
         box-shadow: #ccc 5px 5px 8px;
 
@@ -43,6 +75,17 @@
     }
 }
 
+.publish{
+    .activity-list {
+        border-right: 6px solid red;
+    }
+}
+.other{
+    .activity-list {
+        margin: 20px;
+    }
+}
+
 .btn {
     position: absolute;
     right: 30px;
@@ -52,4 +95,10 @@
     border-radius: 50%;
     font-size: 150px;
     color: white;
+
+    .taroify-button__content {
+        position: relative;
+        top: -12px;
+        ;
+    }
 }

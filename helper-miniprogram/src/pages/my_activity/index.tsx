@@ -1,4 +1,4 @@
-import { Button, Empty, Tabs } from '@taroify/core';
+import { Button, Empty, SwipeCell, Tabs, Image } from '@taroify/core';
 import { resetDefaultDialogOptions } from '@taroify/core/dialog/dialog.imperative';
 import { View, Text, Navigator } from '@tarojs/components'
 import Taro from '@tarojs/taro';
@@ -61,16 +61,48 @@ const userPage = () => {
   const changeTab = (tab) => {
     setTab(tab)
     changeActivityList(TabValues[tab])
+    console.log(tab,TabValues[tab]);
   }
 
 
 
   return (
-    <>
+    <View className='container'>
       <Tabs value={tab} onChange={changeTab}>
         <Tabs.TabPane title="收藏列表"></Tabs.TabPane>
         <Tabs.TabPane title="报名列表"></Tabs.TabPane>
-        <Tabs.TabPane title="发布管理"></Tabs.TabPane>
+
+        <Tabs.TabPane title="发布管理">
+          <View className="activity-lists publish">
+            {
+              activityList.map(item => {
+                return (
+                  <SwipeCell className="custom-swipe-cell">
+                    <Navigator url={`/pages/add_activity/index?_id=${item._id}`} className="activity-list">
+                      <View className="activity-title">
+                        {item.title}
+                      </View>
+                      <View className="activity-content">&nbsp;&nbsp;&nbsp;&nbsp;{item.content}</View>
+                      <View className="activity-bottom">
+                        <Text className="people">{item.where[0] + item.peopleType}</Text>
+                        <Text className="time">{item.time.join(" ")}</Text>
+                      </View>
+                    </Navigator>
+                    <SwipeCell.Actions side="right">
+                      <Button variant="contained" shape="square" color="danger">
+                        删除
+                      </Button>
+                    </SwipeCell.Actions>
+                  </SwipeCell>
+                )
+              })
+            }
+          </View>
+          <Button onClick={() => Taro.navigateTo({ url: '/pages/add_activity/index' })}
+            className={tab != 2 ? "hide" : "btn"}
+            style={{ background: "linear-gradient(to right, #ff6034, #ee0a24)", color: "#fff" }}>+</Button>
+        </Tabs.TabPane>
+
       </Tabs>
 
       <Empty className={activityList.length != 0 ? "hide" : ""}>
@@ -81,11 +113,11 @@ const userPage = () => {
         <Empty.Description>暂无该类活动</Empty.Description>
       </Empty>
 
-      <View className="activity-lists">
+      <View className={tab == 2 ? 'hide' : 'activity-lists other'}>
         {
           activityList.map(item => {
             return (
-              <Navigator url={`/pages/${tab != 2 ? 'activity_item' : 'add_activity'}/index?_id=${item._id}`} className="activity-list">
+              <Navigator url={`/pages/activity_item/index?_id=${item._id}`} className="activity-list">
                 <View className="activity-title">
                   {item.title}
                 </View>
@@ -99,10 +131,8 @@ const userPage = () => {
           })
         }
       </View>
-      <Button onClick={() => Taro.navigateTo({ url: '/pages/add_activity/index' })}
-        className={tab != 2 ? "hide" : "btn"}
-        style={{ background: "linear-gradient(to right, #ff6034, #ee0a24)", color: "#fff" }}>+</Button>
-    </>
+
+    </View>
   )
 }
 
