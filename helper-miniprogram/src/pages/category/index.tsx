@@ -6,6 +6,7 @@ import { VolumeOutlined } from "@taroify/icons"
 import { request } from '../utils/http'
 import { activityListType } from "../utils/type";
 import { useReachBottom } from "@tarojs/taro";
+import { format } from "../utils/tool";
 
 type type = {
   _id: number,
@@ -57,7 +58,7 @@ const categoryPage = () => {
       setActivityList1(res.data)
     })
 
-    request({ url: "/activity", method: "GET", data: { time: formatDate(new Date()) } }).then(res => {
+    request({ url: "/activity", method: "GET", data: { time: new Date().getTime() } }).then(res => {
       setActivityList2(res.data)
     })
   }
@@ -75,7 +76,7 @@ const categoryPage = () => {
   }
 
   const changeActivityList = (date) => {
-    request({ url: "/activity", method: "GET", data: { time: formatDate(date) } }).then(res => {
+    request({ url: "/activity", method: "GET", data: { time: date.getTime() } }).then(res => {
       setActivityList2(res.data)
     })
   }
@@ -90,7 +91,7 @@ const categoryPage = () => {
           value={inputValue}
           placeholder="请输入搜索关键词"
           onChange={(e) => setInputValue(e.detail.value)}
-          action={<Button onClick={searchActivity} variant="outlined" color="danger" hairline style={{width:"60px",height:"35px"}}>搜索</Button>}
+          action={<Button onClick={searchActivity} variant="outlined" color="danger" hairline style={{ width: "60px", height: "35px" }}>搜索</Button>}
         />
 
         <DropdownMenu>
@@ -119,20 +120,20 @@ const categoryPage = () => {
           </DropdownMenu.Item>
         </DropdownMenu>
 
-        <Divider style={{ color: "#ee0a24", borderColor: "#ee0a24", padding: "0 8px" ,marginBottom:"8px"}}>
+        <Divider style={{ color: "#ee0a24", borderColor: "#ee0a24", padding: "0 8px", marginBottom: "8px" }}>
           以下为搜索结果
         </Divider>
         <View className="lists">
           {
             activityList1.map(item => {
               return (
-                <Navigator url={"/pages/activity_item/index?_id=" + item._id} className="list">
+                <Navigator url={"/pageA/pages/activity_item/index?_id=" + item._id} className="list">
                   <View className="left">
                     <VolumeOutlined style={{ color: "#ee0a24" }} />
                     <Text className="title">{item.title}</Text>
                   </View>
                   <View className="right">
-                    <Text className="community">{item.time[0]} </Text>&gt;
+                    <Text className="community">{format(item.time[0])} </Text>&gt;
                   </View>
                 </Navigator>
               )
@@ -160,7 +161,7 @@ const categoryPage = () => {
           {
             activityList2.map(item => {
               return (
-                <Navigator url={"/pages/activity_item/index?_id=" + item._id} className="list">
+                <Navigator url={"/pageA/pages/activity_item/index?_id=" + item._id} className="list">
                   <View className="left">
                     <VolumeOutlined style={{ color: "#ee0a24" }} />
                     <Text className="title">{item.title}</Text>

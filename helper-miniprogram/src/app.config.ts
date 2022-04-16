@@ -3,12 +3,24 @@ export default defineAppConfig({
     "pages/index/index",
     "pages/category/index",
     "pages/user/index",
-    "pages/apply/index",
-    "pages/my_activity/index",
-    "pages/feedback/index",
-    "pages/about/index",
-    "pages/activity_item/index",
-    "pages/add_activity/index",
+  ],
+  subPackages: [
+    {
+      "root":"pageA/",
+      "pages":[
+        "pages/activity_item/index",
+        "pages/my_activity/index",
+        "pages/add_activity/index"
+      ],
+    },
+    {
+      "root":"pageB/",
+      "pages":[
+        "pages/apply/index",
+        "pages/feedback/index",
+        "pages/about/index"
+      ],
+    }
   ],
   window: {
     backgroundTextStyle: "light",

@@ -47,7 +47,9 @@ const indexPage = () => {
   const today: Array<String> = new Date().toDateString().split(" ");   //["Wed", "Mar", "16", "2022"]
 
   useEffect(() => {
-    if (Taro.getStorageSync("userInfo")) setAvatarUrl(Taro.getStorageSync("userInfo").avatarUrl)
+    if (Taro.getStorageSync("userInfo")) {
+      setAvatarUrl(Taro.getStorageSync("userInfo").avatarUrl)
+    }
   }, [])
 
   const getUserInfo = () => {

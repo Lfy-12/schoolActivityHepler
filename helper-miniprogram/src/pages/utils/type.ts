@@ -13,10 +13,9 @@ export type activityListType = {
 }
 
 type commentObj = {
-    _id: string,
-    openid: string,
-    content: string,
-    date: string
+    avatarUrl: string,
+    nickName: string,
+    content: string
 }
 
 export type userInfoType = {

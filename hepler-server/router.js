@@ -111,8 +111,8 @@ router.post('/user/update', async (ctx, next) => {
   // console.log(data);
   try {
     let result;
-    if (data[1].nickname) result = await DB.update('user', data[0], { $set: data[1] });
-    else result = await DB.update('user', data[0], { $push: data[1] });
+    if (data[1].nickname) result = await DB.update('user', DB.getObjectID(data[0]), { $set: data[1] });
+    else result = await DB.update('user', DB.getObjectID(data[0]), { $push: data[1] });
     ctx.response.body = JSON.stringify({
       code: 200,
       data: result

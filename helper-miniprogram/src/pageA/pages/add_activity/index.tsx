@@ -4,9 +4,9 @@ import { View, Input, BaseEventOrig, FormProps } from '@tarojs/components'
 import { ArrowRight,Idcard,Records,ClusterOutlined,Logistics,CalendarOutlined,UnderwayOutlined,FriendsOutlined,PointGiftOutlined,GuideOutlined,ManagerOutlined} from "@taroify/icons"
 import { useEffect, useRef, useState } from 'react';
 import './index.less'
-import { request } from '../utils/http';
+import { request } from '../../../pages/utils/http';
 import Taro from '@tarojs/taro';
-import { formatDate, formatTime } from '../utils/tool';
+import { formatDate, formatTime } from '../../../pages/utils/tool';
 
 const userPage = () => {
 
@@ -47,13 +47,11 @@ const userPage = () => {
     value: string,
   }
 
-
-
   const onSubmit = (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => {
     let data = {
       title: event.detail.value?.title,
       content: event.detail.value?.content,
-      time: [formatDate(event.detail.value?.date), formatTime(event.detail.value?.time)],
+      time: [event.detail.value?.date.getTime(), formatTime(event.detail.value?.time)],
       where: [event.detail.value?.where1[0], event.detail.value?.where2],
       num: 0,
       community: event.detail.value?.community[0],
@@ -70,7 +68,7 @@ const userPage = () => {
           console.log(res);
         })
         Taro.navigateTo({
-          url: '/pages/my_activity/index?type=3',
+          url: '/pageA/pages/my_activity/index?type=3',
         })
       }
       else Toast.open("发布失败")

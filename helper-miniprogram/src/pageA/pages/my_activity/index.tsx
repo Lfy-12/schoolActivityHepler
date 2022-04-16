@@ -1,12 +1,13 @@
-import { Button, Empty, SwipeCell, Tabs, Image } from '@taroify/core';
-import { resetDefaultDialogOptions } from '@taroify/core/dialog/dialog.imperative';
 import { View, Text, Navigator } from '@tarojs/components'
+import { Tabs, SwipeCell, Button, Empty, NoticeBar } from '@taroify/core';
 import Taro from '@tarojs/taro';
 import { getCurrentInstance } from '@tarojs/taro';
 import { useEffect, useState } from 'react';
-import { request } from '../utils/http';
-import { activityListType, userInfoType } from '../utils/type'
+import { request } from '../../../pages/utils/http';
+import { activityListType, userInfoType } from '../../../pages/utils/type'
 import './index.less'
+import { format } from '../../../pages/utils/tool';
+import { VolumeOutlined } from "@taroify/icons"
 
 enum TabValues {
   'collect' = 0,
@@ -61,7 +62,7 @@ const userPage = () => {
   const changeTab = (tab) => {
     setTab(tab)
     changeActivityList(TabValues[tab])
-    console.log(tab,TabValues[tab]);
+    // console.log(tab,TabValues[tab]);
   }
 
 
@@ -73,19 +74,25 @@ const userPage = () => {
         <Tabs.TabPane title="报名列表"></Tabs.TabPane>
 
         <Tabs.TabPane title="发布管理">
+          <NoticeBar scrollable>
+            <NoticeBar.Icon>
+              <VolumeOutlined />
+            </NoticeBar.Icon>
+            左拉，显示删除按钮，可删除活动发布信息，点击可编辑活动发布信息
+          </NoticeBar>
           <View className="activity-lists publish">
             {
               activityList.map(item => {
                 return (
                   <SwipeCell className="custom-swipe-cell">
-                    <Navigator url={`/pages/add_activity/index?_id=${item._id}`} className="activity-list">
+                    <Navigator url={`/pageA/pages/add_activity/index?_id=${item._id}`} className="activity-list">
                       <View className="activity-title">
                         {item.title}
                       </View>
                       <View className="activity-content">&nbsp;&nbsp;&nbsp;&nbsp;{item.content}</View>
                       <View className="activity-bottom">
                         <Text className="people">{item.where[0] + item.peopleType}</Text>
-                        <Text className="time">{item.time.join(" ")}</Text>
+                        <Text className="time">{format(item.time[0]) + item.time[item.time.length - 1]}</Text>
                       </View>
                     </Navigator>
                     <SwipeCell.Actions side="right">
@@ -98,7 +105,7 @@ const userPage = () => {
               })
             }
           </View>
-          <Button onClick={() => Taro.navigateTo({ url: '/pages/add_activity/index' })}
+          <Button onClick={() => Taro.navigateTo({ url: '/pageA/pages/add_activity/index' })}
             className={tab != 2 ? "hide" : "btn"}
             style={{ background: "linear-gradient(to right, #ff6034, #ee0a24)", color: "#fff" }}>+</Button>
         </Tabs.TabPane>
@@ -117,14 +124,14 @@ const userPage = () => {
         {
           activityList.map(item => {
             return (
-              <Navigator url={`/pages/activity_item/index?_id=${item._id}`} className="activity-list">
+              <Navigator url={`/pageA/pages/activity_item/index?_id=${item._id}`} className="activity-list">
                 <View className="activity-title">
                   {item.title}
                 </View>
                 <View className="activity-content">&nbsp;&nbsp;&nbsp;&nbsp;{item.content}</View>
                 <View className="activity-bottom">
                   <Text className="people">{item.where[0] + item.peopleType}</Text>
-                  <Text className="time">{item.time.join(" ")}</Text>
+                  <Text className="time">{format(item.time[0]) + item.time[item.time.length - 1]}</Text>
                 </View>
               </Navigator>
             )
