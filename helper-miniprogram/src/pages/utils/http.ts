@@ -8,7 +8,6 @@ type promiseType = {
 }
 
 export const request = (params) => {
-
     ajaxTimes++;
     // 显示加载中 效果
     Taro.showLoading({
@@ -33,6 +32,5 @@ export const request = (params) => {
             }
         })
     })
-
 }
 

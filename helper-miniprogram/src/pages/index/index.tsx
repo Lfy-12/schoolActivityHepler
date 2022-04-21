@@ -1,7 +1,7 @@
-import { View, Text } from "@tarojs/components";
 import { Swiper, Image, Avatar } from "@taroify/core";
 import "./index.less";
 import { useEffect, useState } from "react";
+import { View, Text, Navigator } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import avatarPng from '../images/avatar.png'
 import categoryPng from '../images/category-floor.png'
@@ -95,10 +95,7 @@ const indexPage = () => {
 
   return (
     <View className="contianer">
-      {/* 搜索框 */}
-      {/* <View className="search_input">
-        <Navigator url="/pages/search/index">搜索</Navigator>
-      </View> */}
+
       <View className="top-info">
         <View className="left">
           <View className="date">
@@ -134,22 +131,22 @@ const indexPage = () => {
       </Swiper>
 
       <View className="floor">
-        <View className="item">
+        <Navigator className="item" openType="switchTab" url="/pages/category/index">
           <Image className="image" src={categoryPng} />
           <Text className="text">分类</Text>
-        </View>
-        <View className="item">
+        </Navigator>
+        <Navigator url="/pageA/pages/date_activity/index?type=0" className="item">
           <Image className="image" src={todayPng} />
           <Text className="text">今日活动</Text>
-        </View>
-        <View className="item">
+        </Navigator>
+        <Navigator url="/pageA/pages/date_activity/index?type=1" className="item">
           <Image className="image" src={futurePng} />
           <Text className="text">即将开始</Text>
-        </View>
-        <View className="item">
+        </Navigator>
+        <Navigator url="/pageA/pages/date_activity/index?type=2" className="item">
           <Image className="image" src={yesterdayPng} />
           <Text className="text">往期精彩</Text>
-        </View>
+        </Navigator>
       </View>
 
       <View className="like-box">
@@ -159,7 +156,7 @@ const indexPage = () => {
         </View>
         <View className="items">
 
-          <View className="item">
+          <Navigator url={"/pageA/pages/activity_item/index?_id=6240695728610ace8819578e"} className="item">
             <Image className="left" src={imagePng} />
             <View className="right">
               <View className="title">{activityInfo[0].title}</View>
@@ -169,9 +166,9 @@ const indexPage = () => {
                 <View className="time">{activityInfo[0].time[0]}</View>
               </View>
             </View>
-          </View>
+          </Navigator>
 
-          <View className="item">
+          <Navigator url={"/pageA/pages/activity_item/index?_id=624bdf65e93d3b6861e6c39f"} className="item">
             <Image className="left" src={imagePng2} />
             <View className="right">
               <View className="title">{activityInfo[1].title}</View>
@@ -181,7 +178,7 @@ const indexPage = () => {
                 <View className="time">{activityInfo[1].time[0]}</View>
               </View>
             </View>
-          </View>
+          </Navigator>
 
         </View>
       </View>

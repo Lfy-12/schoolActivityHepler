@@ -55,6 +55,13 @@
           "name": "活动详情",
           "pathName": "pageA/pages/activity_item/index",
           "query": "_id=6240718c28610ace88195798",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "活动日期",
+          "pathName": "pageA/pages/date_activity/index",
+          "query": "type=0",
           "scene": null,
           "launchMode": "default"
         }

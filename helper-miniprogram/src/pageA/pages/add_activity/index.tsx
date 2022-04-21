@@ -68,7 +68,7 @@ const userPage = () => {
           console.log(res);
         })
         Taro.navigateTo({
-          url: '/pageA/pages/my_activity/index?type=3',
+          url: '/pageA/pages/my_activity/index?type=2',
         })
       }
       else Toast.open("发布失败")
@@ -96,7 +96,7 @@ const userPage = () => {
       setPeopleType(res.data)
     })
 
-    setFormDefaultDate({title:'lfy',date:new Date('2022-4-6'),where1:"广州校区",time:new Date("2012-1-1 14:05")})
+    // setFormDefaultDate({title:'lfy',date:new Date('2022-4-6'),where1:"广州校区",time:new Date("2012-1-1 14:05")})
   }
 
   return (

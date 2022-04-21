@@ -56,7 +56,6 @@ const userPage = () => {
       })
       setActivityList(temp)
     })
-
   }
 
   const changeTab = (tab) => {

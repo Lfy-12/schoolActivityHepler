@@ -63,23 +63,23 @@ const categoryPage = () => {
     })
   }
 
-  const searchActivity = () => {
-    const data: any = {};
-    if (inputValue) data.title = inputValue
-    if (activityTypeValue) data.activityType = activityTypeValue
-    if (sutuoTypeValue) data.sutuoType = sutuoTypeValue
-    if (peopleTypeValue) data.peopleType = peopleTypeValue
-    if (schoolArea) data.where = schoolArea
-    request({ url: "/activity", method: "GET", data }).then(res => {
-      setActivityList1(res.data)
-    })
-  }
+const searchActivity = () => {
+  const data: any = {};
+  if (inputValue) data.title = inputValue
+  if (activityTypeValue) data.activityType = activityTypeValue
+  if (sutuoTypeValue) data.sutuoType = sutuoTypeValue
+  if (peopleTypeValue) data.peopleType = peopleTypeValue
+  if (schoolArea) data.where = schoolArea
+  request({ url: "/activity", method: "GET", data }).then(res => {
+    setActivityList1(res.data)
+  })
+}
 
-  const changeActivityList = (date) => {
-    request({ url: "/activity", method: "GET", data: { time: date.getTime() } }).then(res => {
-      setActivityList2(res.data)
-    })
-  }
+const changeActivityList = (date) => {
+  request({ url: "/activity", method: "GET", data: { time: date.getTime() } }).then(res => {
+    setActivityList2(res.data)
+  })
+}
 
   return (
     <Tabs value={tab} onChange={setTab}>

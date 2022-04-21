@@ -10,7 +10,8 @@ export default defineAppConfig({
       "pages":[
         "pages/activity_item/index",
         "pages/my_activity/index",
-        "pages/add_activity/index"
+        "pages/add_activity/index",
+        "pages/date_activity/index",
       ],
     },
     {
